@@ -1,5 +1,5 @@
 # UrbanDictionary-PosterMaker
-A python script that will create a poster with your favorite word definition from www.urbandictionary.com
+A python script that will create a poster with your favorite word definition from www.urbandictionary.com. The script will only take the top definition.
 ### Prerequisites
 numpy, pillow, urbandictionary
 ```
