@@ -16,7 +16,7 @@ def main(args):
     defs = ub.define(word_to_search)
 
     if not defs:
-        print("Word not found")
+        print("\nWord not found")
         quit()
 
     word = defs[0].word
@@ -31,7 +31,7 @@ def main(args):
     try:
         font = str(args[2])
     except IndexError:
-        print("Need a font to draw the text")
+        print("\nNeed a font to draw the text")
         quit()
 
     try:
@@ -86,6 +86,8 @@ def main(args):
     new_img.save('Poster.png')
 
     print("\nCreated Poster and saved as Poster.png")
+
+    print("\nFont size:", font_size)
 
 
 if __name__ == '__main__':
