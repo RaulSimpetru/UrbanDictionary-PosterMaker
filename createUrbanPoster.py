@@ -1,6 +1,6 @@
 import sys
 
-import urbandictionary as ub
+import requests
 from PIL import Image
 from numpy.polynomial import Polynomial as P
 
@@ -8,20 +8,37 @@ from image_utils import ImageText
 
 bgColor = (29, 36, 57, 255)
 textColor = (255, 255, 255)
+url = "http://api.urbandictionary.com/v0/define?term={}"
 
 
 def main(args):
     word_to_search = str(args[1])
 
-    defs = ub.define(word_to_search)
+    api_search = url.format(word_to_search)
+    response = requests.get(api_search)
+    data = response.json()
+
+    try:
+        which_definition = int(args[3])
+    except:
+        which_definition = 0
+
+    how_many_definitions = len(data["list"])
+
+    if which_definition > how_many_definitions:
+        defs = data["list"][how_many_definitions-1]
+    elif which_definition <= 0:
+        defs = data["list"][0]
+    else:
+        defs = data["list"][which_definition-1]
 
     if not defs:
         print("\nWord not found")
         quit()
 
-    word = defs[0].word
-    definition = defs[0].definition
-    example = defs[0].example
+    word = defs["word"]
+    definition = defs["definition"]
+    example = defs["example"]
 
     print(word + "\n\n" + definition + "\n\n" + example)
 
@@ -35,7 +52,7 @@ def main(args):
         quit()
 
     try:
-        size_of_font = int(args[3])
+        size_of_font = int(args[4])
     except IndexError:
         x_data = [14, 781, 147, 192, 210, 136, 245, 93, 637, 265, 328, 341, 8319]
         y_data = [500, 140, 280, 240, 250, 275, 245, 375, 160, 240, 220, 221, 47]
@@ -87,7 +104,9 @@ def main(args):
 
     print("\nCreated Poster and saved as Poster.png")
 
-    print("\nFont size:", font_size)
+    print("\n\nFont size:", font_size)
+
+    print("\nNumber of definitions:", how_many_definitions)
 
 
 if __name__ == '__main__':
