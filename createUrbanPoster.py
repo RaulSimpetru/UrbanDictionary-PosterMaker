@@ -12,6 +12,7 @@ url = "http://api.urbandictionary.com/v0/define?term={}"
 
 
 def main(args):
+    # Search for the word using the urbandictionary api and get definition and example
     word_to_search = str(args[1])
 
     api_search = url.format(word_to_search)
@@ -45,15 +46,17 @@ def main(args):
     width = 2480
     height = 3508
 
+    # test if a font file has been given else quit
     try:
         font = str(args[2])
-    except IndexError:
+    except FileNotFoundError:
         print("\nNeed a font to draw the text")
         quit()
 
+    # If font size specified set it else use a predefined function to find a tolerable value
     try:
         size_of_font = int(args[4])
-    except IndexError:
+    except:
         x_data = [14, 781, 147, 192, 210, 136, 245, 93, 637, 265, 328, 341, 8319]
         y_data = [500, 140, 280, 240, 250, 275, 245, 375, 160, 240, 220, 221, 47]
 
@@ -62,11 +65,13 @@ def main(args):
         size = len(definition) + len(example)
         size_of_font = int(p(size))
 
+    # If the Urban logo has been copied use it else make a new 1x1 picture
     try:
         logo = Image.open("Urban-Dictionary-logo.png")
     except FileNotFoundError:
         logo = Image.new("RGBA", (1, 1), bgColor)
 
+    # Create the poster
     img = ImageText((width, height), background=bgColor)
     img_temp = ImageText((width, height), background=bgColor)
 
