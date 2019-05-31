@@ -102,7 +102,7 @@ def main(args):
                        color=textColor,
                        place='justify')
 
-    new_img = img.getImage()
+    new_img = img.get_image()
     new_img.paste(logo, (-100, -10))
 
     new_img.save('Poster.png')
