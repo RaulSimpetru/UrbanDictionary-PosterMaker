@@ -117,5 +117,5 @@ class ImageText(object):
                                 font_size, color)
         return box_width, height - y
 
-    def getImage(self):
+    def get_image(self):
         return self.image
