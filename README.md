@@ -11,7 +11,7 @@ pip install numpy pillow
 3. navigate in cmd to the folder with the 2 .py files in it
 4. run the createUrbanPoster.py with the following arguments: word fontfile.ttf definition_number font_size
 
-definition_number: input number for desired definition like 2 for the second definition\
+definition_number: input number for the desired definition like 2 for the second definition\
 font_size: leave empty and the script will try to calculate a font size for the text or enter the font size you want
 
 Example:
